@@ -5,8 +5,7 @@ export default function Admin() {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       // Feather icons (optional but you use them)
-      const feather = require('feather-icons');
-      feather.replace();
+      
 
       // Sidebar open/close
       const sidebar = document.getElementById('sidebar');
