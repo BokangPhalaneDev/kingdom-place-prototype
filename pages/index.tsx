@@ -58,6 +58,17 @@ export default function Home() {
               </div>
             </div>
           </div>
+
+                   <!-- Quick Navigation (for prototype only) -->
+            <div style="position: fixed; bottom: 20px; right: 20px; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); z-index: 9999;">
+              <h4 style="margin: 0 0 6px 0; font-size: 12px; color: #4f46e5;">Quick Nav</h4>
+              <div style="display: flex; flex-direction: column; gap: 6px;">
+                <a href="/" style="font-size: 13px; color: #4f46e5; text-decoration: none;">Home</a>
+                <a href="/booking" style="font-size: 13px; color: #4f46e5; text-decoration: none;">Booking</a>
+                <a href="/login" style="font-size: 13px; color: #4f46e5; text-decoration: none;">Login</a>
+                <a href="/admin" style="font-size: 13px; color: #4f46e5; text-decoration: none;">Admin</a>
+              </div>
+            </div>
         </nav>
 
         <!-- Mobile Menu (hidden by default) -->
