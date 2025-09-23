@@ -4,24 +4,52 @@ import { useEffect } from 'react';
 export default function Admin() {
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      // Sidebar open/close
+      // Elements
       const sidebar = document.getElementById('sidebar');
       const mainContent = document.getElementById('mainContent');
-      const btnInsideSidebar = document.getElementById('toggleSidebar');
-      const btnInHeader = document.getElementById('toggleSidebarHeader');
+      const toggleInside = document.getElementById('toggleSidebar');
+      const toggleHeader = document.getElementById('toggleSidebarHeader');
+      const backdrop = document.getElementById('backdrop');
 
-      const toggle = () => {
-        sidebar?.classList.toggle('expanded');     // slide in/out
-        mainContent?.classList.toggle('shifted');  // add/remove left margin
-      };
-
-      btnInsideSidebar?.addEventListener('click', toggle);
-      btnInHeader?.addEventListener('click', toggle);
-
-      // User menu toggle
       const userMenuButton = document.getElementById('userMenuButton');
       const userMenu = document.getElementById('userMenu');
-      userMenuButton?.addEventListener('click', () => userMenu?.classList.toggle('hidden'));
+
+      const isDesktop = () => window.matchMedia('(min-width: 768px)').matches;
+
+      const applyLayout = () => {
+        const open = sidebar?.classList.contains('expanded');
+        if (isDesktop()) {
+          // shift content only on desktop
+          if (open) mainContent?.classList.add('shifted');
+          else mainContent?.classList.remove('shifted');
+          backdrop?.classList.add('hidden');
+        } else {
+          // overlay on mobile
+          if (open) backdrop?.classList.remove('hidden');
+          else backdrop?.classList.add('hidden');
+          mainContent?.classList.remove('shifted'); // never shift on mobile
+        }
+      };
+
+      const toggle = () => {
+        sidebar?.classList.toggle('expanded');
+        applyLayout();
+      };
+
+      // Start closed
+      sidebar?.classList.remove('expanded');
+      applyLayout();
+
+      // Events
+      toggleInside?.addEventListener('click', toggle);
+      toggleHeader?.addEventListener('click', toggle);
+      backdrop?.addEventListener('click', toggle);
+      window.addEventListener('resize', applyLayout);
+
+      // User menu
+      userMenuButton?.addEventListener('click', () => {
+        userMenu?.classList.toggle('hidden');
+      });
     }
   }, []);
 
@@ -37,23 +65,26 @@ export default function Admin() {
       <div
         dangerouslySetInnerHTML={{
           __html: `
-        <!-- Sidebar closed by default on md+; opens when #sidebar.expanded -->
+        <!-- Off-canvas sidebar + responsive content shift -->
         <style>
+          /* Sidebar: off-canvas by default on all sizes */
+          #sidebar {
+            transform: translateX(-100%);
+            transition: transform .2s ease;
+            will-change: transform;
+          }
+          #sidebar.expanded { transform: translateX(0); }
+
+          /* Main: only shifts on desktop */
+          #mainContent { margin-left: 0; transition: margin-left .2s ease; }
           @media (min-width: 768px) {
-            #sidebar {
-              transform: translateX(-100%);
-              transition: transform .2s ease;
-              will-change: transform;
-            }
-            #sidebar.expanded { transform: translateX(0); }
-            #mainContent { margin-left: 0; transition: margin-left .2s ease; }
-            #mainContent.shifted { margin-left: 16rem; } /* w-64 */
+            #mainContent.shifted { margin-left: 16rem; } /* w-64 = 16rem */
           }
         </style>
 
         <div class="flex h-screen">
-          <!-- Sidebar (hidden on mobile; off-canvas on md+) -->
-          <div class="sidebar bg-indigo-800 text-white w-64 fixed h-full overflow-y-auto hidden md:block" id="sidebar">
+          <!-- Sidebar -->
+          <div class="sidebar bg-indigo-800 text-white w-64 fixed h-full overflow-y-auto z-50" id="sidebar">
             <div class="p-4 flex items-center justify-between border-b border-indigo-700">
               <div class="flex items-center">
                 <img src="http://static.photos/minimal/200x200/1" alt="Logo" class="h-10 w-10 rounded">
@@ -147,13 +178,15 @@ export default function Admin() {
             </div>
           </div>
 
+          <!-- Mobile backdrop (only used under md) -->
+          <div id="backdrop" class="fixed inset-0 bg-black bg-opacity-40 z-40 hidden md:hidden"></div>
+
           <!-- Main Content -->
           <div class="main-content flex-1 ml-0 overflow-y-auto" id="mainContent">
             <!-- Top Navigation -->
             <header class="bg-white shadow-sm">
               <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
                 <div class="flex items-center gap-2">
-                  <!-- Header toggle to open/close sidebar -->
                   <button class="p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100 focus:outline-none" id="toggleSidebarHeader" title="Open/close sidebar">
                     <span aria-hidden="true" class="text-xl leading-none">☰</span>
                   </button>
@@ -188,9 +221,7 @@ export default function Admin() {
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 <div class="bg-white rounded-lg shadow p-6">
                   <div class="flex items-center">
-                    <div class="p-3 rounded-full bg-indigo-100 text-indigo-600">
-                      <span aria-hidden="true">📅</span>
-                    </div>
+                    <div class="p-3 rounded-full bg-indigo-100 text-indigo-600"><span aria-hidden="true">📅</span></div>
                     <div class="ml-4">
                       <p class="text-sm font-medium text-gray-500">Today's Bookings</p>
                       <p class="text-2xl font-semibold text-gray-900">12</p>
@@ -200,9 +231,7 @@ export default function Admin() {
 
                 <div class="bg-white rounded-lg shadow p-6">
                   <div class="flex items-center">
-                    <div class="p-3 rounded-full bg-green-100 text-green-600">
-                      <span aria-hidden="true">💸</span>
-                    </div>
+                    <div class="p-3 rounded-full bg-green-100 text-green-600"><span aria-hidden="true">💸</span></div>
                     <div class="ml-4">
                       <p class="text-sm font-medium text-gray-500">Today's Revenue</p>
                       <p class="text-2xl font-semibold text-gray-900">R24,500</p>
@@ -212,9 +241,7 @@ export default function Admin() {
 
                 <div class="bg-white rounded-lg shadow p-6">
                   <div class="flex items-center">
-                    <div class="p-3 rounded-full bg-blue-100 text-blue-600">
-                      <span aria-hidden="true">👥</span>
-                    </div>
+                    <div class="p-3 rounded-full bg-blue-100 text-blue-600"><span aria-hidden="true">👥</span></div>
                     <div class="ml-4">
                       <p class="text-sm font-medium text-gray-500">Current Guests</p>
                       <p class="text-2xl font-semibold text-gray-900">8</p>
@@ -224,9 +251,7 @@ export default function Admin() {
 
                 <div class="bg-white rounded-lg shadow p-6">
                   <div class="flex items-center">
-                    <div class="p-3 rounded-full bg-yellow-100 text-yellow-600">
-                      <span aria-hidden="true">★</span>
-                    </div>
+                    <div class="p-3 rounded-full bg-yellow-100 text-yellow-600"><span aria-hidden="true">★</span></div>
                     <div class="ml-4">
                       <p class="text-sm font-medium text-gray-500">New Reviews</p>
                       <p class="text-2xl font-semibold text-gray-900">3</p>
@@ -258,48 +283,32 @@ export default function Admin() {
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">John Smith</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Deluxe Room</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">15-18 Nov 2023</td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                          <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Confirmed</span>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                          <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
-                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Confirmed</span></td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium"><a href="#" class="text-indigo-600 hover:text-indigo-900">View</a></td>
                       </tr>
                       <tr>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#KP-1002</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Sarah Johnson</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Executive Suite</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">20-25 Nov 2023</td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                          <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Pending</span>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                          <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
-                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Pending</span></td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium"><a href="#" class="text-indigo-600 hover:text-indigo-900">View</a></td>
                       </tr>
                       <tr>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#KP-1003</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Michael Brown</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Family Room</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">10-12 Dec 2023</td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                          <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Paid</span>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                          <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
-                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Paid</span></td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium"><a href="#" class="text-indigo-600 hover:text-indigo-900">View</a></td>
                       </tr>
                       <tr>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#KP-1004</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Thembi Nkosi</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Deluxe Room</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">05-08 Jan 2024</td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                          <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Cancelled</span>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                          <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
-                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Cancelled</span></td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium"><a href="#" class="text-indigo-600 hover:text-indigo-900">View</a></td>
                       </tr>
                     </tbody>
                   </table>
