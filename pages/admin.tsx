@@ -141,10 +141,7 @@ export default function Admin() {
                   <span>🖼️</span><span class="sidebar-text">Rooms</span>
                 </a>
 
-                <a href="#" class="flex items-center gap-2 py-3 px-4 hover:bg-indigo-700 rounded-lg text-white mt-2">
-                  <span>🎚️</span><span class="sidebar-text">Amenities</span>
-                </a>
-
+               
                 <a href="#" class="flex items-center gap-2 py-3 px-4 hover:bg-indigo-700 rounded-lg text-white mt-2">
                   <span>📄</span><span class="sidebar-text">Pages</span>
                 </a>
@@ -165,9 +162,7 @@ export default function Admin() {
                   <span>🛡️</span><span class="sidebar-text">Security</span>
                 </a>
 
-                <a href="#" class="flex items-center gap-2 py-3 px-4 hover:bg-indigo-700 rounded-lg text-white mt-2">
-                  <span>📊</span><span class="sidebar-text">Reports</span>
-                </a>
+             
 
                 <div class="mt-8 pt-4 border-t border-indigo-700">
                   <a href="/login" class="flex items-center gap-2 py-3 px-4 hover:bg-indigo-700 rounded-lg text-white">
