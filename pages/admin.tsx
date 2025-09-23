@@ -5,8 +5,7 @@ export default function Admin() {
   useEffect(() => {
     // Initialize feather icons and functionality
     if (typeof window !== 'undefined') {
-      const feather = require('feather-icons');
-      feather.replace();
+      
       
       // Sidebar toggle
       const toggleSidebar = document.getElementById('toggleSidebar');

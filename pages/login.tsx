@@ -5,8 +5,7 @@ export default function Login() {
   useEffect(() => {
     // Initialize feather icons and functionality
     if (typeof window !== 'undefined') {
-      const feather = require('feather-icons');
-      feather.replace();
+      
       
       // Toggle password visibility
       const togglePassword = document.querySelector('#togglePassword');
@@ -16,7 +15,7 @@ export default function Login() {
         togglePassword.addEventListener('click', function() {
           const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
           password.setAttribute('type', type);
-          feather.replace();
+          
         });
       }
       

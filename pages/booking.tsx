@@ -5,8 +5,7 @@ export default function Booking() {
   useEffect(() => {
     // Initialize feather icons
     if (typeof window !== 'undefined') {
-      const feather = require('feather-icons');
-      feather.replace();
+     
       
       // Mobile menu toggle
       const menuButton = document.querySelector('.mobile-menu-button');

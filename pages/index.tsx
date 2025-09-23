@@ -4,8 +4,6 @@ import { useEffect } from 'react';
 export default function Home() {
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const feather = require('feather-icons');
-      feather.replace();
       
       const menuButton = document.querySelector('.mobile-menu-button');
       const mobileMenu = document.querySelector('.mobile-menu');
