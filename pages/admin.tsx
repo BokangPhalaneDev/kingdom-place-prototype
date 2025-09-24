@@ -87,7 +87,7 @@ export default function Admin() {
           <div class="sidebar bg-indigo-800 text-white w-64 fixed h-full overflow-y-auto z-50" id="sidebar">
             <div class="p-4 flex items-center justify-between border-b border-indigo-700">
               <div class="flex items-center">
-                <img src="http://static.photos/minimal/200x200/1" alt="Logo" class="h-10 w-10 rounded">
+                <img src="https://picsum.photos/seed/kp-logo/200/200" alt="Logo" class="h-10 w-10 rounded">
                 <span class="logo-text ml-2 text-xl font-bold">Kingdom Place</span>
               </div>
               <button id="toggleSidebar" class="text-white focus:outline-none" title="Close sidebar">
@@ -97,7 +97,7 @@ export default function Admin() {
 
             <div class="p-4">
               <div class="flex items-center mb-6">
-                <img src="http://static.photos/people/200x200/10" alt="Admin" class="h-10 w-10 rounded-full">
+                <img src="https://i.pravatar.cc/200?img=10" alt="Admin" class="h-10 w-10 rounded-full">
                 <div class="ml-3 sidebar-text">
                   <p class="font-medium">Admin User</p>
                   <p class="text-indigo-300 text-sm">Super Admin</p>
@@ -195,7 +195,7 @@ export default function Admin() {
 
                   <div class="relative">
                     <button class="flex items-center space-x-2 focus:outline-none" id="userMenuButton">
-                      <img src="http://static.photos/people/200x200/10" alt="Admin" class="h-8 w-8 rounded-full">
+                      <img src="https://i.pravatar.cc/200?img=10" alt="Admin" class="h-8 w-8 rounded-full">
                       <span class="hidden md:inline">Admin User</span>
                       <span aria-hidden="true" class="text-base leading-none">▾</span>
                     </button>
@@ -321,7 +321,7 @@ export default function Admin() {
                 <div class="divide-y divide-gray-200">
                   <div class="p-6">
                     <div class="flex items-start">
-                      <img src="http://static.photos/people/200x200/1" alt="Guest" class="h-10 w-10 rounded-full">
+                      <img src="https://i.pravatar.cc/200?img=1" alt="Guest" class="h-10 w-10 rounded-full">
                       <div class="ml-4">
                         <div class="flex items-center">
                           <h4 class="text-sm font-semibold">Sarah Johnson</h4>
@@ -335,7 +335,7 @@ export default function Admin() {
 
                   <div class="p-6">
                     <div class="flex items-start">
-                      <img src="http://static.photos/people/200x200/2" alt="Guest" class="h-10 w-10 rounded-full">
+                      <img src="https://i.pravatar.cc/200?img=2" alt="Guest" class="h-10 w-10 rounded-full">
                       <div class="ml-4">
                         <div class="flex items-center">
                           <h4 class="text-sm font-semibold">Michael Brown</h4>

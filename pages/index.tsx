@@ -37,7 +37,7 @@ export default function Home() {
             <div class="flex justify-between h-16">
               <div class="flex items-center">
                 <a href="/" class="flex-shrink-0 flex items-center">
-                  <img class="h-10 w-auto" src="http://static.photos/minimal/200x200/1" alt="Kingdom Place Logo">
+                  <img class="h-10 w-auto" src="https://picsum.photos/seed/kp-logo/200/200" alt="Kingdom Place Logo">
                   <span class="ml-2 text-xl font-bold text-indigo-600">Kingdom Place Guesthouse</span>
                 </a>
               </div>
@@ -109,7 +109,7 @@ export default function Home() {
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <div class="bg-white rounded-lg overflow-hidden shadow-md room-card transition duration-300">
-                <img src="http://static.photos/hotel/640x360/1" alt="Deluxe Room" class="w-full h-64 object-cover">
+                <img src="https://loremflickr.com/640/360/hotel,room?lock=1" alt="Deluxe Room" class="w-full h-64 object-cover">
                 <div class="p-6">
                   <h3 class="text-xl font-semibold mb-2">Deluxe Room</h3>
                   <p class="text-gray-600 mb-4">Spacious room with king-size bed and modern amenities</p>
@@ -121,7 +121,7 @@ export default function Home() {
               </div>
 
               <div class="bg-white rounded-lg overflow-hidden shadow-md room-card transition duration-300">
-                <img src="http://static.photos/hotel/640x360/2" alt="Executive Suite" class="w-full h-64 object-cover">
+                <img src="https://loremflickr.com/640/360/hotel,room?lock=2" alt="Executive Suite" class="w-full h-64 object-cover">
                 <div class="p-6">
                   <h3 class="text-xl font-semibold mb-2">Executive Suite</h3>
                   <p class="text-gray-600 mb-4">Luxurious suite with separate living area and premium features</p>
@@ -133,7 +133,7 @@ export default function Home() {
               </div>
 
               <div class="bg-white rounded-lg overflow-hidden shadow-md room-card transition duration-300">
-                <img src="http://static.photos/hotel/640x360/3" alt="Family Room" class="w-full h-64 object-cover">
+                <img src="https://loremflickr.com/640/360/hotel,room?lock=3" alt="Family Room" class="w-full h-64 object-cover">
                 <div class="p-6">
                   <h3 class="text-xl font-semibold mb-2">Family Room</h3>
                   <p class="text-gray-600 mb-4">Perfect for families with children, featuring extra space</p>

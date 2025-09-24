@@ -41,7 +41,7 @@ export default function Login() {
           <div class="max-w-md w-full space-y-8">
             <div>
               <div class="flex justify-center">
-                <img class="h-16 w-auto" src="http://static.photos/minimal/200x200/1" alt="Kingdom Place Logo">
+                <img class="h-16 w-auto" src="https://picsum.photos/seed/kp-logo/200/200" alt="Kingdom Place Logo">
               </div>
               <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
                 Admin Portal

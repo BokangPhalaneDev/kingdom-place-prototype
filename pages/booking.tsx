@@ -34,7 +34,7 @@ export default function Booking() {
             <div class="flex justify-between h-16">
               <div class="flex items-center">
                 <a href="/" class="flex-shrink-0 flex items-center">
-                  <img class="h-10 w-auto" src="http://static.photos/minimal/200x200/1" alt="Kingdom Place Logo">
+                  <img class="h-10 w-auto" src="https://picsum.photos/seed/kp-logo/200/200" alt="Kingdom Place Logo">
                   <span class="ml-2 text-xl font-bold text-indigo-600">Kingdom Place Guesthouse</span>
                 </a>
               </div>
